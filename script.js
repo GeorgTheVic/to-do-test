@@ -1,30 +1,27 @@
 document.addEventListener('DOMContentLoaded', () => {
-
-    // Получаем ссылку на форму добавления задач, список задач и поле ввода новой задачи
     const taskForm = document.querySelector('.todo__form');
     const taskList = document.querySelector('.todo__list');
     const newTaskInput = document.querySelector('.todo__input');
     const clear = document.querySelector('.todo__button-clear');
 
     // Загружаем задачи из localStorage, если они есть, или создаём пустой массив для задач
-    const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
 
     // Функция сохранения задач в localStorage
     function saveTasks() {
         localStorage.setItem('tasks', JSON.stringify(tasks));
-
-        // location.reload();
     }
 
     // Функция для отрисовки задач на экране
     function renderTasks() {
-        // Очищаем текущий список задач на странице
         taskList.innerHTML = '';
 
         // Проходимся по каждой задаче и добавляем её в список
         tasks.forEach((task, index) => {
-            const li = document.createElement('li'); // Создаём новый элемент списка
-            li.textContent = task.text; // Устанавливаем текст задачи
+            const li = document.createElement('li'); 
+            
+            li.textContent = task.text; 
+            
             li.classList.add('todo__item')
 
             // Если задача выполнена, добавляем соответствующий класс
@@ -35,8 +32,9 @@ document.addEventListener('DOMContentLoaded', () => {
             // Добавляем событие для отметки задачи как выполненной или невыполненной
             li.addEventListener('click', () => {
                 tasks[index].completed = !tasks[index].completed; // Переключаем статус задачи
-                saveTasks(); // Сохраняем изменения в localStorage
-                renderTasks(); // Перерисовываем список задач
+                saveTasks(); 
+                
+                renderTasks(); 
             });
 
             // Создаём кнопку удаления задачи
@@ -47,46 +45,46 @@ document.addEventListener('DOMContentLoaded', () => {
             // Добавляем событие для удаления задачи
             deleteButton.addEventListener('click', (e) => {
                 e.stopPropagation(); // Останавливаем всплытие события, чтобы задача не помечалась выполненной при удалении
-                tasks.splice(index, 1); // Удаляем задачу из массива задач
-                saveTasks(); // Сохраняем изменения в localStorage
-                renderTasks(); // Перерисовываем список задач
+                tasks.splice(index, 1);
+                
+                saveTasks();
+                
+                renderTasks();
             });
-
-            // Добавляем кнопку удаления в элемент списка задачи
+            
             li.append(deleteButton);
-
-            // Добавляем элемент задачи в список задач на странице
+            
             taskList.append(li);
         });
     }
 
-    // Добавляем обработчик события на отправку формы (добавление новой задачи)
+    // Добавление новой задачи
     taskForm.addEventListener('submit', (e) => {
-        e.preventDefault(); // Предотвращаем стандартное поведение формы (перезагрузку страницы)
+        e.preventDefault();
 
-        const newTaskText = newTaskInput.value.trim(); // Получаем текст новой задачи и удаляем лишние пробелы
+        const newTaskText = newTaskInput.value.trim();
 
-        if (newTaskText !== '') { // Проверяем, что текст задачи не пустой
-            tasks.push({ text: newTaskText, completed: false }); // Добавляем новую задачу в массив задач
-            saveTasks(); // Сохраняем изменения в localStorage
-            renderTasks(); // Перерисовываем список задач
-            newTaskInput.value = ''; // Очищаем поле ввода новой задачи
+        if (newTaskText !== '') {
+            tasks.push({ text: newTaskText, completed: false });
+            
+            saveTasks()
+            
+            renderTasks();
+
+            newTaskInput.value = '';
         }
     });
 
-    //todo: fix this button
-
     clear.addEventListener('click', (e) => {
+        e.preventDefault()
 
-        // e.stopPropagation(); // Останавливаем всплытие события, чтобы задача не помечалась выполненной при удалении
+        localStorage.clear();
 
+        taskList.innerHTML = '';
 
-        localStorage.clear()
-        // saveTasks(); // Сохраняем изменения в localStorage
-        renderTasks(); // Перерисовываем список задач
+        tasks = [];
     })
 
-    // Отрисовываем список задач при загрузке страницы
     renderTasks();
 
     console.log(localStorage)
