@@ -4,17 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To-Do List</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <h1>Список задач</h1>
-        <form id="task-form">
-            <input type="text" id="new-task" placeholder="Введите новую задачу..." required>
-            <button type="submit">Добавить</button>
-            <button type="submit">Очистить список</button>
+        <h1 class="todo__title">Список задач</h1>
+        <form class="todo__form" id="task-form">
+            <input class="todo__input" type="text" id="new-task" placeholder="Введите новую задачу..." required>
+            <button class="todo__button-add" type="submit">Добавить</button>
         </form>
-        <ul id="task-list"></ul>
+        <button class="todo__button-clear" >Очистить список</button>
+        <ul class="todo__list" id="task-list"></ul>
     </div>
     <script src="script.js"></script>
 </body>

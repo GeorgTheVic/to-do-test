@@ -17,17 +17,17 @@ body {
     width: 300px;
 }
 
-h1 {
+.todo__title {
     text-align: center;
     color: #333;
 }
 
-form {
+.todo__form {
     display: flex;
     margin-bottom: 20px;
 }
 
-input[type="text"] {
+.todo__input {
     flex: 1;
     padding: 10px;
     border: 1px solid #ccc;
@@ -35,7 +35,7 @@ input[type="text"] {
     margin-right: 10px;
 }
 
-button {
+.todo__button-add {
     padding: 10px 15px;
     background-color: #28a745;
     color: white;
@@ -44,16 +44,16 @@ button {
     cursor: pointer;
 }
 
-button:hover {
+.todo__button-add:hover {
     background-color: #218838;
 }
 
-ul {
+.todo__list {
     list-style-type: none;
     padding: 0;
 }
 
-li {
+.todo__item {
     background-color: #f9f9f9;
     padding: 10px;
     border: 1px solid #ddd;
@@ -64,12 +64,12 @@ li {
     margin-bottom: 5px;
 }
 
-li.completed {
+.completed {
     text-decoration: line-through;
     color: #888;
 }
 
-li button {
+.delete {
     background-color: #dc3545;
     border: none;
     color: white;
@@ -78,6 +78,6 @@ li button {
     padding: 5px 10px;
 }
 
-li button:hover {
+.delete:hover {
     background-color: #c82333;
 }
